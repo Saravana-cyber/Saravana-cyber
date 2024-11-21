@@ -1,0 +1,127 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        th {
+            background-color: #f0f0f0;
+            text-align: left;
+        }
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Student Attendance System</h2>
+        
+        <!-- Form to Add Students -->
+        <div class="input-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" placeholder="Enter student name">
+        </div>
+        <button onclick="addStudent()">Add Student</button>
+        
+        <!-- Form to Take Attendance -->
+        <div class="input-group">
+            <label for="attendanceStudent">Select Student</label>
+            <select id="attendanceStudent">
+                <option value="" disabled selected>Select student</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="attendanceStatus">Attendance Status</label>
+            <select id="attendanceStatus">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+            </select>
+        </div>
+        
+        <button onclick="markAttendance()">Mark Attendance</button>
+        
+        <!-- Attendance Table -->
+        <h3>Attendance Report</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceReport">
+                <!-- Attendance data will appear here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Array to store student data
+        let students = [];
+        // Array to store attendance records
+        let attendance = [];
+
+        // Function to add a student to the list
+        function addStudent() {
+            const studentName = document.getElementById('studentName').value;
+            if (studentName === "") {
+                alert("Please enter a student name.");
+                return;
+            }
+
+            // Add student to the students array
+            students.push(studentName);
+
+            // Update the student selection dropdown for attendance
+            const selectElement = document.getElementById('attendanceStudent');
+            const option = document.createElement("option");
+            option.value = studentName;
+            option.textContent = studentName;
+            selectElement.appendChild(option);
+
+            // Clear the input field
+            document.getElementById('studentName').value = '';
+            alert(`${studentName} has been added.`);
+        }
+
+        // Function to mark attendance
+        function markAttendance() {
+            const selectedStudent = document.getElementById
